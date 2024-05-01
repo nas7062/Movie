@@ -17,6 +17,11 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+  list-style: none;
+}
+li{
+  text-decoration: inherit;
+  list-style: none;
 }
 a:hover {
   color: #535bf2;
