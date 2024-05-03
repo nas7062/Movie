@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react"
-import {useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import axios from "axios";
+import styled from "styled-components";
+
+const Logo = styled. div`
+    font-size:1.8rem;
+    text-align:center;
+    position:relative;
+    top:-20px;
+    
+`
 export default function Detail()
 {
     const {id} = useParams();
@@ -19,10 +28,17 @@ export default function Detail()
     console.log(movies);
     return(
         <div>
+            <Link to="/">
+            <Logo>    
+                10012
+            </Logo>
+            </Link>
+            <img src={movies.large_cover_image} alt="" />
             <h2>{movies.title}</h2>
-            <p>{movies.description_full}</p>
             <p>Year: {movies.year}</p>
-        </div>
+            <p>Genres: {movies.genres}</p>
+            <p>{movies.description_full}</p>
+        </div >
 
 
     );

@@ -5,6 +5,8 @@ import img from "../../assets/images.jpg";
 import styled from "styled-components";
 import Slider from "react-slick"
 import { Link } from "react-router-dom";
+import Modal from "../Modal/Modal";
+import HomeMovie from "../HomeMovie/HomeMovie";
 const Img = styled.img`
     width:100%;
     position:absolute;
@@ -72,6 +74,17 @@ const Title = styled.span`
 export default function Home() {
     const [loading, setloading] = useState(true);
     const [movies, setmovies] = useState([]);
+    const [isModal,setisModal]= useState(false);
+    const [selectId,setselectId] = useState(null);
+    const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
+    const SelectIdClick = (movieId, event) =>{
+        const clickX = event.clientX ;
+        const clickY = event.clientY-100;
+        setModalPosition({ x: clickX, y: clickY });
+            setselectId(movieId);
+            setisModal(!isModal);
+           
+    }
     const settings = {
         infinite: true,
         speed: 200,
@@ -92,20 +105,19 @@ export default function Home() {
     useEffect(() => {
         GetMovies();
     }, []);
-   
+
     return (
-        <div>
+        <>
+        {!loading ? <div>
             <Header />
             <div>
-                <Img src={img} alt="" />
-                <Btn>재생</Btn>
-                <Btn>상세 정보</Btn>
+                <Img src={movies && movies[0].large_cover_image} alt="" />    
             </div>
             <Title>영화 추천</Title>
-            <Movies {...settings}>
-                
+            <Movies {...settings} >
                 {movies.map((movie) => (
-                    <Movie
+                    <div key={movie.id} onClick={(event)=>SelectIdClick(movie.id,event)} >
+                    <Movie  
                         key={movie.id}
                         id={movie.id}
                         year={movie.year}
@@ -113,11 +125,16 @@ export default function Home() {
                         title={movie.title}
                         summary={movie.summary}
                         genres={movie.genres}
+                        setisModal = {setisModal}
+                        isModal ={isModal}
                     />
+                    { selectId === movie.id&& isModal && <Modal movidId ={movie.id} clickPosition={modalPosition}/>}
+                    </div>
                 ))}
-
             </Movies>
-        </div>
+        </div> :"loading..."}
+        <HomeMovie/>
+        </>
 
     );
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Head = styled.div`
@@ -25,9 +26,11 @@ export default function Header()
 {
     return(
         <Head>
+            <Link to="/">
             <Logo>
                 10012
             </Logo>
+            </Link>
             <Ul>
                 <li>홈</li>
                 <li>영화</li>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -25,7 +26,8 @@ const Descript = styled.div`
     opacity: 0;
     transition: all 0.5s;
     transform: translateY(2.5rem);
-    
+    margin-bottom:-50px;
+    margin-top:-50px;
     &:hover {
     opacity: 0.7;
     transform: translateY(0rem);
@@ -34,7 +36,9 @@ const Descript = styled.div`
 const Gen = styled.div`
     display:inline-block;
     width:300px;
-
+    position:relative;
+    
+    
     & li {
         display:inline-block;
         margin-right:20px;
@@ -47,21 +51,20 @@ const Gen = styled.div`
 const Btn = styled.div`
     position:relative;
     top:-15px;
-
   & button{
     margin-left:10px;
-    
-    
   }
 `
+
  export default function Movie({id,Img,title,year,summary,genres})
 {
+    
     return(
         <Gen>
         <Card>
         <img src={Img} alt="" />
         </Card>
-    <Descript>
+    <Descript >
         <Btn>
             <Link  to={`/movie/${id}`}>
             <button>상세 정보</button>
