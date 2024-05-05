@@ -32,13 +32,13 @@ export default function Header()
             </Logo>
             </Link>
             <Ul>
-                <li>홈</li>
-                <li>영화</li>
-                <li>드라마</li>
-                <li>호러</li>
-                <li>로맨스</li>
-                <li>코미디</li>
-                <li>액션</li>
+                <li><Link to="/"> 홈</Link></li>
+                <li><Link to="/"> 영화</Link></li>
+                <li><Link to="/"> 드라마</Link></li>
+                <li><Link to="/horror"> 호러</Link></li>
+                <li><Link to="/"> 로맨스</Link></li>
+                <li><Link to="/"> 코미디</Link></li>
+                <li><Link to="/"> 액션</Link></li>
             </Ul>
             
         </Head>

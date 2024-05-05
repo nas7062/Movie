@@ -67,7 +67,7 @@ export default function Modal({movidId,clickPosition })
         }
         fetchData();
     },[movidId]);
-    
+    console.log(movie);
     console.log(clickPosition);
     return(
         <Back >

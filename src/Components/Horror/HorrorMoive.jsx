@@ -13,7 +13,7 @@ const More = styled.button `
     position:relative;
     background-color:gray;
 `
-export default function HomeMovie()
+export default function HorrorMovie()
 {   
     const [movies,setmovies]= useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +22,7 @@ export default function HomeMovie()
         const GetMovies = async () => {
             const response = await fetch(
                  (
-                    `https://yts.mx/api/v2/list_movies.json?minimum_rating=5&sort_by=year&page=${currentPage}`
+                    `https://yts.mx/api/v2/list_movies.json?minimum_rating=5&sort_by=year&page=${currentPage}&genre=horror`
                 ));
                 const json = await response.json();
                 setmovies(prevMovies => [...prevMovies, ...json.data.movies]);
@@ -42,7 +42,7 @@ export default function HomeMovie()
                 year={movie.year}
                 Img={movie.medium_cover_image}
                 title={movie.title}
-                summary={movie.summary}
+                    summary={movie.summary}
                 genres={movie.genres}/>
             ))}
             <More onClick={loadMoreMovies}>Load More...</More>
