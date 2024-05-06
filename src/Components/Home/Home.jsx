@@ -5,8 +5,8 @@ import img from "../../assets/images.jpg";
 import styled from "styled-components";
 import Slider from "react-slick"
 import { Link } from "react-router-dom";
-import Modal from "../Modal/Modal";
-import HomeMovie from "../HomeMovie/HomeMovie";
+import Modal from "./Modal";
+import HomeMovie from "./HomeMovie";
 const Img = styled.img`
     width:100%;
     position:absolute;
@@ -66,7 +66,7 @@ const Movies = styled(Slider)`
 `
 const Title = styled.span`
     position:relative;
-    top:-130px;
+    top:-20px;
     font-size:1.8rem;
     left:100px;
 `
@@ -105,7 +105,7 @@ export default function Home() {
     useEffect(() => {
         GetMovies();
     }, []);
-
+    console.log(movies);
     return (
         <>
         {!loading ? <div>

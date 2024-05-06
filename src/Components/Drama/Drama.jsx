@@ -3,8 +3,8 @@ import Movie from "../Movie/Movie";
 import Header from "../Header/Header";
 import styled from "styled-components";
 import Slider from "react-slick";
-import HorrorModal from "./HorrorModal";
-import HorrorMovie from "./HorrorMoive";
+import DramaModal from "./DramaModal";
+import DramaMoive from "./DramaMoive";
 
 
 const Movies = styled(Slider)`
@@ -50,7 +50,7 @@ display:inline-block;
 
 const Title = styled.span`
 position:relative;
-top: -20px;
+top:-20px;
 font-size:1.8rem;
 left:100px;/
 `;
@@ -62,9 +62,9 @@ const Img = styled.img`
     height:800px;
     display:inline-block;
 `
-const Horror = () => {
+const Drama = () => {
   const [loading, setLoading] = useState(true);
-  const [horrorMovies, setHorrorMovies] = useState([]);
+  const [DramaMovies, setDramaMovies] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
@@ -82,10 +82,10 @@ const Horror = () => {
     const fetchHorrorMovies = async () => {
      
         const response = await fetch(
-          `https://yts.mx/api/v2/list_movies.json?genre=horror&sort_by=year`
+          `https://yts.mx/api/v2/list_movies.json?genre=drama&sort_by=year`
         )
         const { data } = await response.json();
-        setHorrorMovies(data.movies);
+        setDramaMovies(data.movies);
         setLoading(false);
       
        
@@ -109,11 +109,11 @@ const Horror = () => {
         <div>
           <Header />
           <div>
-                <Img src={horrorMovies && horrorMovies[1].large_cover_image} alt="" />    
+                <Img src={DramaMovies && DramaMovies[1].large_cover_image} alt="" />    
             </div>
-          <Title>호러 영화 추천</Title>
+          <Title>드라마 추천</Title>
           <Movies {...settings}>
-            {horrorMovies.map((movie) => (
+            {DramaMovies.map((movie) => (
               <div key={movie.id} onClick={(event) => handleMovieClick(movie.id, event)}>
                 <Movie
                   key={movie.id}
@@ -125,7 +125,7 @@ const Horror = () => {
                   genres={movie.genres}
                 />
                 {selectedMovieId === movie.id && isModal && (
-                  <HorrorModal movieId={movie.id} clickPosition={modalPosition} />
+                  <DramaModal movieId={movie.id} clickPosition={modalPosition} />
                 )}
               </div>
             ))}
@@ -135,9 +135,9 @@ const Horror = () => {
       ) : (
         "Loading..."
       ) }
-      <HorrorMovie/>
+      <DramaMoive/>
     </>
   );
 };
 
-export default Horror;
+export default Drama;

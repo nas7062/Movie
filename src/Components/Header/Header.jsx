@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 const Head = styled.div`
     position:fixed;
+    z-index:1;
 `
-const Logo =styled.div`
+const Logo = styled.div`
     font-size:2.3rem;
     font-weight:800;
     position:fixed;
@@ -22,25 +23,31 @@ const Ul = styled.ul`
         margin:0px 20px;
     }
 `
-export default function Header()
-{
-    return(
+const Li = styled.li`
+position:fixed;
+left:90%;
+`
+
+export default function Header() {
+    return (
         <Head>
             <Link to="/">
-            <Logo>
-                10012
-            </Logo>
+                <Logo>
+                    10012
+                </Logo>
             </Link>
             <Ul>
                 <li><Link to="/"> 홈</Link></li>
-                <li><Link to="/"> 영화</Link></li>
-                <li><Link to="/"> 드라마</Link></li>
+                <li><Link to="/drama"> 드라마</Link></li>
                 <li><Link to="/horror"> 호러</Link></li>
                 <li><Link to="/"> 로맨스</Link></li>
-                <li><Link to="/"> 코미디</Link></li>
-                <li><Link to="/"> 액션</Link></li>
+                <li><Link to="/drama"> 코미디</Link></li>
+                <li><Link to="/horror"> 액션</Link></li>
+
+                <Li>로그인</Li>
+
             </Ul>
-            
+
         </Head>
 
     );
