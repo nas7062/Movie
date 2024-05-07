@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { authService } from "../../firebase/firebase";
+import { useSelector } from "react-redux";
 const Head = styled.div`
     position:fixed;
     z-index:1;
@@ -26,9 +28,24 @@ const Ul = styled.ul`
 const Li = styled.li`
 position:fixed;
 left:90%;
+
+`
+const Li2 = styled.li`
+    position:fixed;
+    left:82%;
+    & >  a span {
+        color:red;
+    }
 `
 
 export default function Header() {
+    const [currentuser,setcurrentuser] = useState(authService.currentUser);
+    const count = useSelector((state)=>state.Cart.Cart);
+    const Logout = () =>{
+        authService.signOut();
+        currentuser(null);
+    }
+    console.log(count);
     return (
         <Head>
             <Link to="/">
@@ -43,8 +60,10 @@ export default function Header() {
                 <li><Link to="/"> 로맨스</Link></li>
                 <li><Link to="/drama"> 코미디</Link></li>
                 <li><Link to="/horror"> 액션</Link></li>
-
-                <Li>로그인</Li>
+                <Li2><Link to="/cart">찜해두기<span> {count.length}</span></Link></Li2>
+                {!currentuser ? <Li><Link to="/auth">로그인</Link></Li> : 
+                <Li><Link  onClick={()=>Logout()}>로그아웃</Link></Li>}
+                
 
             </Ul>
 

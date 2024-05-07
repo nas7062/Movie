@@ -4,6 +4,7 @@ import Home from './Components/Home/Home'
 import Detail from './Components/Detail/Detail'
 import Horror from './Components/Horror/Horror'
 import Drama from './Components/Drama/Drama'
+import Auth from './Components/Auth/Auth'
 function App() {
  
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/horror" element={<Horror />} />
         <Route path="/drama" element={<Drama />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="/movie/:id" element={<Detail />} />
       </Routes>
     </BrowserRouter>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import {Link, useParams} from "react-router-dom"
 import axios from "axios";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "../../reducer/cartslice";
 
 const Logo = styled. div`
     font-size:1.8rem;
@@ -13,8 +15,9 @@ const Logo = styled. div`
 export default function Detail()
 {
     const {id} = useParams();
+    const cart = useSelector((state)=>state.Cart.Cart);
     const [movies,setmovies] = useState([]);
-
+    const dispatch  = useDispatch();
     useEffect(()=>{
         async function fetchData(){
             const request = await axios.get(
@@ -24,8 +27,13 @@ export default function Detail()
         }
         fetchData();
     },[id]);
-
-    console.log(movies);
+    const AddCart = () =>{
+        if(movies)
+            {
+                dispatch(addCart(movies));
+            }
+    }
+    console.log(cart);
     return(
         <div>
             <Link to="/">
@@ -38,6 +46,7 @@ export default function Detail()
             <p>Year: {movies.year}</p>
             <p>Genres: {movies.genres}</p>
             <p>{movies.description_full}</p>
+            <button onClick={()=>AddCart()}>Add to Cart</button>
         </div >
 
 
