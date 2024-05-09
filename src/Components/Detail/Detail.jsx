@@ -4,6 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../reducer/cartslice";
+import { authService } from "../../firebase/firebase";
+import Header from "../Header/Header";
 
 const Logo = styled. div`
     font-size:1.8rem;
@@ -17,6 +19,7 @@ export default function Detail()
     const {id} = useParams();
     const cart = useSelector((state)=>state.Cart.Cart);
     const [movies,setmovies] = useState([]);
+    const [currentuser,setcurrentuser] = useState(authService.currentUser);
     const dispatch  = useDispatch();
     useEffect(()=>{
         async function fetchData(){
@@ -28,7 +31,7 @@ export default function Detail()
         fetchData();
     },[id]);
     const AddCart = () =>{
-        if(movies)
+        if(movies && currentuser)
             {
                 dispatch(addCart(movies));
             }
@@ -36,6 +39,7 @@ export default function Detail()
     console.log(cart);
     return(
         <div>
+            <Header/>
             <Link to="/">
             <Logo>    
                 10012
@@ -46,7 +50,7 @@ export default function Detail()
             <p>Year: {movies.year}</p>
             <p>Genres: {movies.genres}</p>
             <p>{movies.description_full}</p>
-            <button onClick={()=>AddCart()}>Add to Cart</button>
+            <button onClick={AddCart}>Add to Cart</button>
         </div >
 
 

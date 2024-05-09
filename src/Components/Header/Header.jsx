@@ -60,9 +60,10 @@ export default function Header() {
                 <li><Link to="/"> 로맨스</Link></li>
                 <li><Link to="/drama"> 코미디</Link></li>
                 <li><Link to="/horror"> 액션</Link></li>
-                <Li2><Link to="/cart">찜해두기<span> {count.length}</span></Link></Li2>
-                {!currentuser ? <Li><Link to="/auth">로그인</Link></Li> : 
-                <Li><Link  onClick={()=>Logout()}>로그아웃</Link></Li>}
+               
+                {!currentuser ? <Li><Link to="/auth">로그인</Link></Li> : <>
+                 <Li2><Link to="/cart">찜해두기<span> {count.length}</span></Link></Li2> 
+                 <Li><Link  onClick={()=>Logout()}>로그아웃</Link></Li> </>}
                 
 
             </Ul>
